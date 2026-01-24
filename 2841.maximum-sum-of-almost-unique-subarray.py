@@ -41,7 +41,7 @@ class Solution:
             
         # return ans
 
-        n = len(nums)
+        n = len(nums) #
         #法二：滑动窗口 + 哈希表
         
             
