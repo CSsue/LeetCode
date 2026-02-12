@@ -41,9 +41,37 @@ class Solution:
             
         # return ans
 
-        n = len(nums) #
-        #法二：滑动窗口 + 哈希表
-        
+
+        #法二：滑动窗口 + 哈希表（灵）
+        ans = 0
+        sum = 0
+        # 此处用字典的变种：defaultdict,作用是自动初始化为0，计数器专用字典
+        cnt = defaultdict(int)
+
+        for i, val in enumerate(nums):
+            # 1.进入窗口
+            sum += val
+            cnt[val] += 1
+            left = i - k + 1
+
+            if left < 0:
+                continue
+
+            # 2.更新数值
+            if len(cnt) >= m:
+                ans = max(ans, sum)
+
+            # 3.退出窗口
+            f_val = nums[left] 
+            sum -= f_val
+            cnt[f_val] -= 1
+
+            # 唯一的元素退出，需要进行删除，改变dict的长度
+            if cnt[f_val] == 0:
+                del cnt[f_val]
+
+        return ans
+
             
 # @lc code=end
 
